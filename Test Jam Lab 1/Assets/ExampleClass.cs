@@ -8,7 +8,7 @@ public class ExampleClass : MonoBehaviour {
 	}
 	void FixedUpdate() {
 		if (Input.GetButtonDown("Jump"))
-			rb.velocity = new Vector3(0, 3, 0);
+			rb.velocity = new Vector3(0, 4, 0);
 		
 	}
 }
