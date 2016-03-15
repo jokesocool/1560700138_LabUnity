@@ -2,32 +2,36 @@
 using System.Collections;
 
 public class GameControl : MonoBehaviour {
-	float speedX = 0;
-	float speedY = 1;
-	float speedZ = 0;
-	public Rigidbody rb;
-
 	public GameObject hazard;
-	public Vector3 spawnValues;
+	public int hazardCount;
+	public float spawnWait;
+	public float startWait;
+	public float waveWait;
 
-	// Use this for initialization
 	void Start () {
-		SpawnWaves ();
+		StartCoroutine (SpawnWaves ());
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		rb = GetComponent<Rigidbody> ();
-		transform.Translate (new Vector3 (speedX, speedY, speedZ) * Time.deltaTime);
+		
 	}
-	void OnCollisionEnter(Collision collision){
-		if (collision.gameObject.tag == "Wall") {
-			Destroy (this.gameObject);
+	public void DoPlayAgain(){
+		Application.LoadLevel (0);
+	
+	}
+	IEnumerator SpawnWaves()
+	{
+		yield return new WaitForSeconds (startWait);
+		while (true) {
+			for (int i = 0; i < hazardCount; i++) {
+				Vector3 spawnPosition = new Vector3 (4, 0, 0);
+				Quaternion spawnRotation = Quaternion.identity;
+				GameObject hazardShoot = (GameObject)Instantiate (hazard, spawnPosition, spawnRotation);
+				hazardShoot.transform.Rotate (new Vector3 (0, 0, 1), 90);
+				yield return new WaitForSeconds (spawnWait);
+			}
+			yield return new WaitForSeconds (waveWait);
 		}
 	}
-	void SpawnWaves(){
-		Vector3 spawnPosition = new Vector3 (spawnValues.x, spawnValues.y, spawnValues.z);
-		Quaternion spawnRotation = Quaternion.identity;
-		Instantiate (hazard, spawnPosition, spawnRotation);
-	}
+
 }
