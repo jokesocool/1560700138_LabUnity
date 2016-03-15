@@ -12,6 +12,8 @@ public class EvasiveManeuver : MonoBehaviour
 	public Vector2 maneuverWait;
 	public Boundary boundary;
 
+	private Transform PlayerTransform;
+
 	private float currentSpeed;
 	private float targetManeuver;
 	private Rigidbody rb;
