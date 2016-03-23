@@ -44,11 +44,15 @@ public class Kadod : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.CompareTag ("score+1")) {
 			Debug.Log ("Check");
-
 			count++;
 			countText.text = "score : " + count.ToString ();
 
-		}
+		} 
+		else if (other.gameObject.CompareTag ("score-1")) {
+			count--;
+			countText.text = "score : " + count.ToString ();
+			
+		} 
 	}
 
 }
