@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Done_GameController : MonoBehaviour
@@ -9,37 +10,39 @@ public class Done_GameController : MonoBehaviour
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
-	
-	public GUIText scoreText;
-	public GUIText restartText;
-	public GUIText gameOverText;
-	
+
+	public Text scoreText;
+	//  public Text restartText;
+	public Text gameOverText;
+	public GameObject restartButton;
+
 	private bool gameOver;
-	private bool restart;
+	//  private bool restart;
 	private int score;
-	
+
 	void Start ()
 	{
 		gameOver = false;
-		restart = false;
-		restartText.text = "";
+		//      restart = false;
+		//      restartText.text = "";
 		gameOverText.text = "";
+		restartButton.SetActive (false);
 		score = 0;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
 	}
-	
-	void Update ()
-	{
-		if (restart)
-		{
-			if (Input.GetKeyDown (KeyCode.R))
-			{
-				Application.LoadLevel (Application.loadedLevel);
-			}
-		}
-	}
-	
+
+	//  void Update ()
+	//  {
+	//      if (restart)
+	//      {
+	//          if (Input.GetKeyDown (KeyCode.R))
+	//          {
+	//              Application.LoadLevel (Application.loadedLevel);
+	//          }
+	//      }
+	//  }
+
 	IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
@@ -54,30 +57,35 @@ public class Done_GameController : MonoBehaviour
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
-			
+
 			if (gameOver)
 			{
-				restartText.text = "Press 'R' for Restart";
-				restart = true;
+				restartButton.SetActive (true);
+				//              restartText.text = "Press 'R' for Restart";
+				//              restart = true;
 				break;
 			}
 		}
 	}
-	
+
 	public void AddScore (int newScoreValue)
 	{
 		score += newScoreValue;
 		UpdateScore ();
 	}
-	
+
 	void UpdateScore ()
 	{
 		scoreText.text = "Score: " + score;
 	}
-	
+
 	public void GameOver ()
 	{
 		gameOverText.text = "Game Over!";
 		gameOver = true;
+	}
+
+	public void RestartGame () {
+		Application.LoadLevel (Application.loadedLevel);
 	}
 }
