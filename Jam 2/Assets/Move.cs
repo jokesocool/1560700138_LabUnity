@@ -16,7 +16,7 @@ public class Move : MonoBehaviour
 		rb.transform.Translate (new Vector3 (speedX, speedY, speedZ) * Time.deltaTime);
 	}
 	void OnCollisionEnter(Collision collision) {
-		if(collision.gameObject.tag == "box"){
+		if(collision.gameObject.tag == "destroys"){
 			Destroy (this.gameObject);
 		}
 	}
