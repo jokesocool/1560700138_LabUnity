@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Move : MonoBehaviour
 {
-	public float speedX = 0;
-	public float speedY = 1;
+	public float speedX = -2;
+	public float speedY = 0;
 	public float speedZ = 0;
 	public Rigidbody rb;
 	void Start ()
