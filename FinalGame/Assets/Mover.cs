@@ -8,6 +8,7 @@ public class Mover : MonoBehaviour
 	void Start ()
 	{
 		GetComponent<Rigidbody>().velocity = transform.forward * speed;
-		Physics.gravity = new Vector3(0, -5.0F, 0);
+		Physics.gravity = new Vector3(0,-5.0f,0);
 	}
+
 }
